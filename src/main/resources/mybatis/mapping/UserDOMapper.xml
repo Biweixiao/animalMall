@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bwx.mapper.UserDOMapper">
+    <resultMap id="BaseResultMap" type="com.bwx.Entity.DO.UserDO">
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_tel" jdbcType="VARCHAR" property="userTel"/>
+        <result column="user_address" jdbcType="VARCHAR" property="userAddress"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        user_id, open_id, user_name, user_tel, user_address, last_update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.bwx.Entity.DO.UserDO">
+        insert into user (user_id, open_id, user_name,
+        user_tel, user_address, last_update_time
+        )
+        values (#{userId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+        #{userTel,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.bwx.Entity.DO.UserDO">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userTel != null">
+                user_tel,
+            </if>
+            <if test="userAddress != null">
+                user_address,
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userTel != null">
+                #{userTel,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddress != null">
+                #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null">
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bwx.Entity.DO.UserDO">
+        update user
+        <set>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userTel != null">
+                user_tel = #{userTel,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddress != null">
+                user_address = #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bwx.Entity.DO.UserDO">
+        update user
+        set open_id = #{openId,jdbcType=VARCHAR},
+        user_name = #{userName,jdbcType=VARCHAR},
+        user_tel = #{userTel,jdbcType=VARCHAR},
+        user_address = #{userAddress,jdbcType=VARCHAR},
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="selectByTel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_tel = #{userTel,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="selectByOpenId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+</mapper>

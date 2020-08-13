@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bwx.mapper.ProductDOMapper">
+    <resultMap id="BaseResultMap" type="com.bwx.Entity.DO.ProductDO">
+        <id column="product_id" jdbcType="VARCHAR" property="productId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="product_description" jdbcType="VARCHAR" property="productDescription"/>
+        <result column="product_price" jdbcType="DOUBLE" property="productPrice"/>
+        <result column="product_address" jdbcType="VARCHAR" property="productAddress"/>
+        <result column="main_image_num" jdbcType="INTEGER" property="mainImageNum"/>
+        <result column="detail_image_num" jdbcType="INTEGER" property="detailImageNum"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        product_id, user_id, product_name, product_description, product_price, product_address,
+        main_image_num, detail_image_num, last_update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+        where product_id = #{productId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from product
+        where product_id = #{productId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.bwx.Entity.DO.ProductDO">
+        insert into product (product_id, user_id, product_name,
+        product_description, product_price, product_address,
+        main_image_num, detail_image_num, last_update_time
+        )
+        values (#{productId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},
+        #{productDescription,jdbcType=VARCHAR}, #{productPrice,jdbcType=DOUBLE}, #{productAddress,jdbcType=VARCHAR},
+        #{mainImageNum,jdbcType=INTEGER}, #{detailImageNum,jdbcType=INTEGER}, #{lastUpdateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.bwx.Entity.DO.ProductDO">
+        insert into product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="productDescription != null">
+                product_description,
+            </if>
+            <if test="productPrice != null">
+                product_price,
+            </if>
+            <if test="productAddress != null">
+                product_address,
+            </if>
+            <if test="mainImageNum != null">
+                main_image_num,
+            </if>
+            <if test="detailImageNum != null">
+                detail_image_num,
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productDescription != null">
+                #{productDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="productPrice != null">
+                #{productPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="productAddress != null">
+                #{productAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="mainImageNum != null">
+                #{mainImageNum,jdbcType=INTEGER},
+            </if>
+            <if test="detailImageNum != null">
+                #{detailImageNum,jdbcType=INTEGER},
+            </if>
+            <if test="lastUpdateTime != null">
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bwx.Entity.DO.ProductDO">
+        update product
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productDescription != null">
+                product_description = #{productDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="productPrice != null">
+                product_price = #{productPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="productAddress != null">
+                product_address = #{productAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="mainImageNum != null">
+                main_image_num = #{mainImageNum,jdbcType=INTEGER},
+            </if>
+            <if test="detailImageNum != null">
+                detail_image_num = #{detailImageNum,jdbcType=INTEGER},
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where product_id = #{productId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bwx.Entity.DO.ProductDO">
+        update product
+        set user_id = #{userId,jdbcType=VARCHAR},
+        product_name = #{productName,jdbcType=VARCHAR},
+        product_description = #{productDescription,jdbcType=VARCHAR},
+        product_price = #{productPrice,jdbcType=DOUBLE},
+        product_address = #{productAddress,jdbcType=VARCHAR},
+        main_image_num = #{mainImageNum,jdbcType=INTEGER},
+        detail_image_num = #{detailImageNum,jdbcType=INTEGER},
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+        where product_id = #{productId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectAllProduct" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product where user_id=#{userId,jdbcType=VARCHAR}
+    </select>
+</mapper>

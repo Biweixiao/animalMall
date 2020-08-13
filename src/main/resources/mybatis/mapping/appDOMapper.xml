@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bwx.mapper.appDOMapper">
+    <resultMap id="BaseResultMap" type="com.bwx.Entity.DO.appDO">
+        <id column="appid" jdbcType="VARCHAR" property="appid"/>
+        <result column="secret" jdbcType="VARCHAR" property="secret"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        appid, secret
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from app
+        where appid = #{appid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from app
+        where appid = #{appid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.bwx.Entity.DO.appDO">
+        insert into app (appid, secret)
+        values (#{appid,jdbcType=VARCHAR}, #{secret,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bwx.Entity.DO.appDO">
+        insert into app
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appid != null">
+                appid,
+            </if>
+            <if test="secret != null">
+                secret,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appid != null">
+                #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="secret != null">
+                #{secret,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bwx.Entity.DO.appDO">
+        update app
+        <set>
+            <if test="secret != null">
+                secret = #{secret,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where appid = #{appid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bwx.Entity.DO.appDO">
+        update app
+        set secret = #{secret,jdbcType=VARCHAR}
+        where appid = #{appid,jdbcType=VARCHAR}
+    </update>
+</mapper>

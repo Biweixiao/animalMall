@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bwx.mapper.PastureDOMapper">
+    <resultMap id="BaseResultMap" type="com.bwx.Entity.DO.PastureDO">
+        <id column="pasture_id" jdbcType="VARCHAR" property="pastureId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="pasture_name" jdbcType="VARCHAR" property="pastureName"/>
+        <result column="pasture_address" jdbcType="VARCHAR" property="pastureAddress"/>
+        <result column="pasture_description" jdbcType="VARCHAR" property="pastureDescription"/>
+        <result column="main_image_num" jdbcType="INTEGER" property="mainImageNum"/>
+        <result column="detail_image_num" jdbcType="INTEGER" property="detailImageNum"/>
+        <result column="like_num" jdbcType="INTEGER" property="likeNum"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        pasture_id, user_id, pasture_name, pasture_address, pasture_description, main_image_num,
+        detail_image_num, like_num, last_update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pasture
+        where pasture_id = #{pastureId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from pasture
+        where pasture_id = #{pastureId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.bwx.Entity.DO.PastureDO">
+        insert into pasture (pasture_id, user_id, pasture_name,
+        pasture_address, pasture_description, main_image_num,
+        detail_image_num, like_num, last_update_time
+        )
+        values (#{pastureId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{pastureName,jdbcType=VARCHAR},
+        #{pastureAddress,jdbcType=VARCHAR}, #{pastureDescription,jdbcType=VARCHAR}, #{mainImageNum,jdbcType=INTEGER},
+        #{detailImageNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, #{lastUpdateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.bwx.Entity.DO.PastureDO">
+        insert into pasture
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pastureId != null">
+                pasture_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="pastureName != null">
+                pasture_name,
+            </if>
+            <if test="pastureAddress != null">
+                pasture_address,
+            </if>
+            <if test="pastureDescription != null">
+                pasture_description,
+            </if>
+            <if test="mainImageNum != null">
+                main_image_num,
+            </if>
+            <if test="detailImageNum != null">
+                detail_image_num,
+            </if>
+            <if test="likeNum != null">
+                like_num,
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pastureId != null">
+                #{pastureId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="pastureName != null">
+                #{pastureName,jdbcType=VARCHAR},
+            </if>
+            <if test="pastureAddress != null">
+                #{pastureAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="pastureDescription != null">
+                #{pastureDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="mainImageNum != null">
+                #{mainImageNum,jdbcType=INTEGER},
+            </if>
+            <if test="detailImageNum != null">
+                #{detailImageNum,jdbcType=INTEGER},
+            </if>
+            <if test="likeNum != null">
+                #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="lastUpdateTime != null">
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bwx.Entity.DO.PastureDO">
+        update pasture
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="pastureName != null">
+                pasture_name = #{pastureName,jdbcType=VARCHAR},
+            </if>
+            <if test="pastureAddress != null">
+                pasture_address = #{pastureAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="pastureDescription != null">
+                pasture_description = #{pastureDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="mainImageNum != null">
+                main_image_num = #{mainImageNum,jdbcType=INTEGER},
+            </if>
+            <if test="detailImageNum != null">
+                detail_image_num = #{detailImageNum,jdbcType=INTEGER},
+            </if>
+            <if test="likeNum != null">
+                like_num = #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where pasture_id = #{pastureId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bwx.Entity.DO.PastureDO">
+        update pasture
+        set user_id = #{userId,jdbcType=VARCHAR},
+        pasture_name = #{pastureName,jdbcType=VARCHAR},
+        pasture_address = #{pastureAddress,jdbcType=VARCHAR},
+        pasture_description = #{pastureDescription,jdbcType=VARCHAR},
+        main_image_num = #{mainImageNum,jdbcType=INTEGER},
+        detail_image_num = #{detailImageNum,jdbcType=INTEGER},
+        like_num = #{likeNum,jdbcType=INTEGER},
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+        where pasture_id = #{pastureId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pasture
+    </select>
+
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pasture
+        where pasture_id=#{pastureId,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>
